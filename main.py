@@ -1,12 +1,14 @@
-from RPi import GPIO
+import RPi.GPIO as GPIO
+from dotenv import load_dotenv
 
 from controllers import run_controllers
-from dispenser.Dispenser import Dispenser
+from database.Dispenser import Dispenser
 from electronics.ComponentCollection import ComponentCollection
 
 
 def run():
     print("Client started")
+    load_dotenv()
 
     GPIO.setmode(GPIO.BCM)
 
