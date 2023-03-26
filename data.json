@@ -1,0 +1,6 @@
+{
+  "enable_wifi": false,
+  "wifi_ssid": null,
+  "wifi_password": null,
+  "first_start": true
+}
