@@ -4,6 +4,7 @@ from time import sleep
 from httpcore import ConnectError
 
 from database.Dispenser import Dispenser
+import logging
 
 
 class ConnectController:
@@ -18,5 +19,5 @@ class ConnectController:
                 self.dispenser.update()
                 self.dispenser.notify_server()
             except ConnectError:
-                print("Pas internet")
-            sleep(60 * 5)
+                logging.error("Pas internet")
+            # sleep(60 * 5)
