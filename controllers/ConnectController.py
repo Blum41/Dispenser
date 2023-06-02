@@ -9,6 +9,9 @@ import logging
 import threading
 import socket
 
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 class ConnectController:
     """ Connect to internet """
 
@@ -18,34 +21,29 @@ class ConnectController:
     def __call__(self):
         threading.Thread(target=self.start_web_server).start()
         while True:
-            print("a")
-            test = self.is_connected()
-            print(test)
-            print("b")
             if self.is_connected():
                 self.dispenser.led_off(2);
             else:
                 self.dispenser.led_on(2);
                 
             if self.dispenser.switch_is_on():
-                print("test 1")
                 sleep(1)
-                print("test 2")
                 if self.dispenser.switch_is_on():
-                    print("test 3")
-
                     self.dispenser.led_on(1);
-                    print("test 4")
+                    
                     os.popen("cp /etc/dhcpcd.conf.static /etc/dhcpcd.conf")
                     os.popen("systemctl restart dhcpcd")
                     os.popen("systemctl restart dnsmasq")
                     os.popen("systemctl restart hostapd")
                     print("test 5")
+            self.dispenser.update()
+            self.dispenser.notify_server()
+            try:
 
-            #self.dispenser.update()
-            #self.dispenser.notify_server()
-                
-            
+                self.dispenser.update()
+                self.dispenser.notify_server()
+            except:
+                pass
             sleep(2)
             
 

@@ -28,11 +28,13 @@ class Dispenser:
 
     def update(self):
         data = self.database.client.table("dispensers").select("*").eq("id", getenv("DEVICE_ID")).single().execute().data
-        boxes = self.database.client.table("boxes").select("*").eq("dispenser_id", getenv("DEVICE_ID")).gt("boxes_number", 0).order("boxes_number", desc=True).execute().data
+        boxes = self.database.client.table("boxes").select("*").eq("dispenser_id", getenv("DEVICE_ID")).gt("box_number", 0).gt("current_number", 0).order("box_number", desc=True).execute().data
+        print(len(boxes))
         self.boxes = []
         for boxe in boxes:
-            b = Box(boxe["boxes_number"], boxe["current_drugs_number"], boxe["rule"])
+            b = Box(boxe["box_number"], boxe["current_number"], boxe["rules"], boxe["initial_number"])
             self.boxes.append(b)
+        print(self.boxes)
 
     def notify_server(self):
         self.database.client.table("dispensers").update({
@@ -56,7 +58,6 @@ class Dispenser:
         self.serial.write("e\n".encode("utf-8"));
         while True:
             data = self.serial.readline().decode("utf-8")
-            print("Valeur : ", data)
             if "switch1=" in data:
                 sleep(0.1)
                 return int(data.split("=")[1]) == 1

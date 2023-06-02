@@ -29,6 +29,7 @@ def run():
     #             if wifi_name not in wifis and wifi_name != "":
     #                 wifis.append(wifi_name)
     #     return wifis
+    logging.log(logging.INFO, "Success start")
 
     run_controllers(dispenser)
 
