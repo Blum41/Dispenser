@@ -43,6 +43,24 @@ class ConnectController:
         @app.route("/setup/wifi/password/<wifi>", methods=["POST", "GET"])
         def setup_wifi_password(wifi):
             if request.method == "POST" and request.form.get("password"):
+                with open("/etc/wpa_supplicant/wpa_supplicant.conf", "w") as f:
+                    content = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev"
+                    content += "\n"
+                    content += "country=FR"
+                    content += "\n"
+                    content += "\n"
+                    content += "network={"
+                    content += "\n"
+                    content += "\tssid=\"" + str(wifi) + "\""
+                    content += "\n"
+                    content += "\tpsk=\"" + str(request.form.get("password")) + "\""
+                    content += "\n"
+                    content += "\tkey_mgmt=WPA-PSK"
+                    content += "\n"
+                    content += "}"
+                    content += "\n"
+                    f.write(content)
+                    f.close()
                 return "OUI !" + request.form.get("password")
 
             return render_template("password.html", wifi=wifi)
