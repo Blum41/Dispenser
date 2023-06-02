@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="stylesheet" href="./bootstrap_icons.css">
-    <title>Configuration du wifi</title>
-</head>
-<body>
-    <main class="container">
+{% extends 'base.html' %}
+{% block content %}
         <section>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon_finish" width="100" height="100" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                 <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
@@ -18,8 +8,6 @@
         </section>
         <section>
             <h1>Votre appareil est prêt !</h1>
-            <p>Vous pouvez fermer cette page !</p>
+            <p>Vous pouvez fermer cette page et revenir sur l'application !</p>
         </section>
-    </main>
-</body>
-</html>
+{% endblock %}

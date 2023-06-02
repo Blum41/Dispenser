@@ -11,9 +11,14 @@ from time import sleep
 
 class Dispenser:
     def __init__(self):
-        self.serial = serial.Serial("/dev/ttyACM0", 9600, timeout=3.0)
-        # self.serial.reset_output_buffer()
-        # self.serial.reset_input_buffer()
+        while True:
+            try:
+                self.serial = serial.Serial("/dev/ttyACM0", 9600, timeout=1)
+                self.serial.reset_output_buffer()
+                self.serial.reset_input_buffer()
+                break
+            except:
+                pass
 
         self.is_dispensing: bool = None
         self.boxes: list[Box] = []
@@ -39,11 +44,28 @@ class Dispenser:
 
     def get_distance(self) -> int:
         """ Return distance in cm """
+        self.serial.write("e\n".encode("utf-8"));
+
         while True:
             data = self.serial.readline().decode("utf-8")
             if "distance=" in data:
                 sleep(0.1)
                 return int(data.split("=")[1])
+
+    def switch_is_on(self) -> bool:
+        self.serial.write("e\n".encode("utf-8"));
+        while True:
+            data = self.serial.readline().decode("utf-8")
+            print("Valeur : ", data)
+            if "switch1=" in data:
+                sleep(0.1)
+                return int(data.split("=")[1]) == 1
+    
+    def led_on(self, number: int):
+        self.serial.write(f"L{number}=1\n".encode("utf-8"))
+        
+    def led_off(self, number: int):
+        self.serial.write(f"L{number}=0\n".encode("utf-8"))
 
     def set_servo_position(self, number: int, angle: int) -> None:
         """ Set servo position with given angle in degrees"""
