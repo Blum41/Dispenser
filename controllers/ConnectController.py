@@ -61,6 +61,15 @@ class ConnectController:
                     content += "\n"
                     f.write(content)
                     f.close()
+
+                    os.popen("cp /etc/dhcpcd.conf.dynamic /etc/dhcpcd.conf")
+                    os.popen("systemctl stop hostapd")
+                    os.popen("systemctl unmask hostapd")
+
+                    os.popen("systemctl stop dnsmasq")
+                    os.popen("systemctl unmask dnsmasq")
+                    os.popen("reboot")
+
                 return "OUI !" + request.form.get("password")
 
             return render_template("password.html", wifi=wifi)
