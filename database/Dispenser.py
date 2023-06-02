@@ -3,24 +3,21 @@ from os import getenv
 import serial
 
 from database.Box import Box
-from database.Rule import Rule
 from database.database import Database
-from electronics.ComponentCollection import ComponentCollection
 
 from datetime import datetime
 from time import sleep
 
 
 class Dispenser:
-    def __init__(self, component_collection: ComponentCollection):
+    def __init__(self):
         self.serial = serial.Serial("/dev/ttyACM0", 9600, timeout=3.0)
-        self.serial.reset_output_buffer()
-        self.serial.reset_input_buffer()
+        # self.serial.reset_output_buffer()
+        # self.serial.reset_input_buffer()
 
         self.is_dispensing: bool = None
         self.boxes: list[Box] = []
         self.database = Database()
-        self.component_collection = component_collection
         self.drug_is_taken: bool = False
         self.rules = []
 

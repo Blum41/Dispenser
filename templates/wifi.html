@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Configuration du Wifi{% endblock %}
+
+{% block content %}
+        <form method="POST">
+            <h1>Veuillez sélectionner l'un des réseaux Wifi disponibles :</h1>
+            <!-- <ul>
+                <li><i class="bi bi-wifi"></i> WIFI_SSID</li>
+                <li><i class="bi bi-wifi"></i> WIFI_SSID</li>
+                <li><i class="bi bi-wifi"></i> WIFI_SSID</li>
+                <li><i class="bi bi-wifi"></i> WIFI_SSID</li>
+
+            </ul> -->
+            {% for wifi in wifi_list %}
+                <input class="wifi_label" type="radio" name="wifi" value="{{ wifi }}" id="{{ wifi }}" >
+                <label class="wifi_label" for="{{ wifi }}">
+                    <i class="bi bi-wifi"></i> {{ wifi }}
+                </label>
+            {% endfor %}
+            <button type="submit">Suivant</button>
+            <button type="button" class="refresh_button" onclick="window.location.href = '{{ url_for('setup_wifi') }}'">Rafraichir la liste</button>
+
+        </form>
+{% endblock %}

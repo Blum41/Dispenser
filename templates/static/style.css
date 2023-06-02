@@ -1,0 +1,133 @@
+@import url("./bootstrap_icons/bootstrap-icons.css");
+
+@font-face {
+  font-family: "Jost";
+  src: url("Jost-VariableFont_wght.ttf");
+}
+* {
+    font-family: "Jost", sans-serif;
+}
+
+main {
+    text-align: center;
+    min-height: 100vh;
+    padding: 10%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ededed;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+button {
+    background-color: #003247;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-weight: 500;
+    font-family: "Jost";
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: none;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 21px;
+    width: 100%;
+
+    transition-property: all;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+}
+
+button:hover {
+    background: #013f5a;
+    transition-property: all;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+
+}
+
+li, label.wifi_label {
+    border-radius: 10px;
+    text-align: left;
+    padding: 20px;
+    list-style: none;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label.wifi_label {
+    background: #003247;
+    color: white;
+  }
+
+  label.wifi_label {
+    display: block;
+  }
+
+  .refresh_button {
+    background: none;
+    color: #003247;
+    font-size: 16px;
+  }
+
+  .refresh_button:hover {
+    background: none;
+  }
+  label {
+    display:block;
+  }
+  form {
+    width: 100%;
+  }
+  input[type="password"], input[type="text"] {
+    width: calc(100% - 2*9px);
+    border-radius: 10px;
+    padding: 9px;
+    border: none;
+    margin: 0;
+    height: 29px;
+    font-size: 16px;
+}
+
+input[type="password"]:focus, input[type="text"]:focus {
+    border-color: #003247!important;
+    border-style: none!important;
+    outline: none;
+    /* font-size: 40px; */
+
+}
+
+label {
+    text-align: left;
+}
+
+.classic_label {
+  margin: 10px 0;
+}
+
+.alert {
+  color: rgb(199, 2, 2);
+}
+
+.icon_finish {
+  color: green;
+}

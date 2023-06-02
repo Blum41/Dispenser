@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from database.Dispenser import Dispenser
 
 
 class Dispensing:
@@ -9,5 +8,5 @@ class Dispensing:
         self.box = box
         self.number = number
 
-    def dispense(self, dispenser: Dispenser):
+    def dispense(self, dispenser):
         print("DISTRIBUTION EN COURS !!!!!!!!!!!!")
