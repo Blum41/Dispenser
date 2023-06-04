@@ -29,12 +29,10 @@ class Dispenser:
     def update(self):
         data = self.database.client.table("dispensers").select("*").eq("id", getenv("DEVICE_ID")).single().execute().data
         boxes = self.database.client.table("boxes").select("*").eq("dispenser_id", getenv("DEVICE_ID")).gt("box_number", 0).gt("current_number", 0).order("box_number", desc=True).execute().data
-        print(len(boxes))
         self.boxes = []
         for boxe in boxes:
-            b = Box(boxe["box_number"], boxe["current_number"], boxe["rules"], boxe["initial_number"])
+            b = Box(boxe["id"], boxe["box_number"], boxe["current_number"], boxe["rules"], boxe["initial_number"])
             self.boxes.append(b)
-        print(self.boxes)
 
     def notify_server(self):
         self.database.client.table("dispensers").update({
@@ -43,6 +41,8 @@ class Dispenser:
             "boxes_number": len(self.boxes),
             "is_dispensing": self.is_dispensing
         }).eq("id", getenv("DEVICE_ID")).execute()
+         
+        
 
     def get_distance(self) -> int:
         """ Return distance in cm """

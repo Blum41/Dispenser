@@ -4,8 +4,8 @@ from database.Task import Dispensing
 
 
 class Box:
-    def __init__(self, name: int, current_drugs_number: int, rules: dict, initial_number: int):
-        assert current_drugs_number >= 0
+    def __init__(self, id: int, name: int, current_drugs_number: int, rules: dict, initial_number: int):
+        self.id: int = id
         self.name: int = name
         self.current_number: int = current_drugs_number
         self.initial_number: int = initial_number
@@ -19,4 +19,4 @@ class Box:
         return datetime.today().weekday() in self.rules["days"] and time(datetime.now().time().hour, datetime.now().minute) in self.hours
 
     def get_task(self) -> Dispensing:
-        return Dispensing(box=self.name, number=self.rules["quantity"], current_number=self.current_number, initial_number=self.initial_number)
+        return Dispensing(box_o=self, box=self.name, number=self.rules["quantity"], current_number=self.current_number, initial_number=self.initial_number)

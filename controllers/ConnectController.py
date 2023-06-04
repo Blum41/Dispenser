@@ -36,8 +36,6 @@ class ConnectController:
                     os.popen("systemctl restart dnsmasq")
                     os.popen("systemctl restart hostapd")
                     print("test 5")
-            self.dispenser.update()
-            self.dispenser.notify_server()
             try:
 
                 self.dispenser.update()

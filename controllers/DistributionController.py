@@ -29,7 +29,8 @@ class DistributionController:
     def dispensing(self):
         while True:
             if len(self.tasks) > 0:
-                self.tasks.pop(0).dispense(self.dispenser)
+                task = self.tasks.pop(0)
+                task.dispense(self.dispenser)
 
     def update_dispenser(self):
         self.update_dispenser()

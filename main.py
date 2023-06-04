@@ -17,6 +17,9 @@ def run():
     GPIO.setmode(GPIO.BCM)
     sleep(2)
     dispenser = Dispenser()
+    dispenser.set_servo_position(1, 0)
+    dispenser.set_servo_position(2, 0)
+    dispenser.set_servo_position(3, 0)
     # print(os.popen("iwlist wlan0 scan | egrep 'ESSID|WPA2'").read().replace(" ", "").split("\n"))
     sleep(2)
     # def scan_wifi():
